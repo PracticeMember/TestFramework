@@ -1,0 +1,7 @@
+test-output/
+target/
+reports/
+*.settings
+*.classpath
+*.log
+*.tmp
