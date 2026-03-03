@@ -22,7 +22,7 @@ public class DriverSetup {
 		case "chrome": return createChromeDriver();
 		case "firefox": return createFirefoxDriver();
 		case "edge": return createEdgeDriver();
-		default: return null;
+		default: return createChromeDriver();
 		}
 	}
 

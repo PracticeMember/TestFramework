@@ -75,7 +75,7 @@ public class BaseTest {
 	    this.page=new PageManager();
 	}
 	
-	@AfterMethod
+	@AfterMethod(alwaysRun=true)
 	public void teardown() {
 		DriverFactory.removeDriver();
 	}
