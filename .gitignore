@@ -1,5 +1,9 @@
 test-output/
 target/
+<<<<<<< Upstream, based on origin/master
+=======
+test-reports/
+>>>>>>> 3317920 Added report configuration classes
 *.settings
 *.classpath
 *.log
