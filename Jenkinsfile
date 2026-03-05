@@ -15,4 +15,12 @@ pipeline{
 
     }
 
+	post{ 
+	    always{
+	        junit '**/target/surfire-reports/*.xml'
+	        archiveArtifacts artifacts: 'test-reports/**',
+	        allowEmptyArchive: true
+	    }
+	}
+
 }
