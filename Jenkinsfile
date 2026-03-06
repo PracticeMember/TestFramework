@@ -27,7 +27,7 @@ pipeline{
     }
 		post{
    			  always{
-		        junit '**/target/surefire-report/*.xml'
+		        junit '**/target/surefire-reports/*.xml'
 		        archiveArtifacts artifacts: 'test-reports/**',
 		        allowEmptyArchive: true
 		    }
