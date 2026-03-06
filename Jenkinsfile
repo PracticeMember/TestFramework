@@ -1,42 +1,39 @@
 pipeline{
     agent any
     
-    parameters{
+    stages{
         
-        choice(
-         name: 'BROWSER',
-         choices: [ 'chrome','firefox'],
-         description: 'Select browser to run tests'
-    )
-	}
-	
-    stages{    
         stage('Checkout'){
-            steps{
-                git branch: 'master' ,
-                url: 'https://github.com/PracticeMember/TestFramework.git'  
-            }
+            git branch: 'master'
+            url: 'https://github.com/PracticeMember/TestFramework.git'
         }
-		stage('Build and test'){
-		    steps{   
-		        bat 'mvn clean test -Dbrowser=${params.BROWSER}'
+		stage('Build and Test in Parallel'){
+		    parallel{
+		        stage('Chrome Tests'){
+		        steps{
+		            bat 'mvn clean test -Dbrowser=chrome'
+		        }
+		        }
+		        stage('Firefox Tests'){
+		         steps{
+		             bat 'mvn clean test -Dbrowser=firefox'
+		          }
+		        }
+
+		        }
+		}
+
+		post{
+		    
+		    always{
+		        
+		        junit '**/target/surefire-report/*.xml'
+		        archiveArtifacts artifacts: 'test-reports/**',
+		        allowEmptyArchive: true
 		    }
+
 		}
 
     }
-
-	post{ 
-	    always{
-	        junit '**/target/surefire-reports/*.xml'
-	        publishHTML([
-	        	reportDir: 'test-reports',
-	        	reportFiles: 'ExtentReporter.html',
-	        	reportName:'ExtentReport',
-	        	keepAll: true
-	         ])
-	        archiveArtifacts artifacts: 'test-reports/**',
-	        allowEmptyArchive: true
-	    }
-	}
 
 }
