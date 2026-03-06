@@ -4,8 +4,10 @@ pipeline{
     stages{
         
         stage('Checkout'){
+        steps{
             git branch: 'master'
             url: 'https://github.com/PracticeMember/TestFramework.git'
+            }
         }
 		stage('Build and Test in Parallel'){
 		    parallel{
