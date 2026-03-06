@@ -2,11 +2,10 @@ pipeline{
     agent any
     
     stages{
-        
         stage('Checkout'){
         steps{
-            git branch: 'master'
-            url: 'https://github.com/PracticeMember/TestFramework.git'
+             git branch: 'master',
+             url: 'https://github.com/PracticeMember/TestFramework.git'
             }
         }
 		stage('Build and Test in Parallel'){
@@ -25,17 +24,13 @@ pipeline{
 		        }
 		}
 
+    }
 		post{
-		    
-		    always{
-		        
+   			  always{
 		        junit '**/target/surefire-report/*.xml'
 		        archiveArtifacts artifacts: 'test-reports/**',
 		        allowEmptyArchive: true
 		    }
 
 		}
-
-    }
-
 }
