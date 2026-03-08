@@ -18,7 +18,7 @@ public class ScreenshotUtil {
 		File src = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		String path="test-reports/screenshots/"+screenshotName+".png";
 		try {
-			Files.createDirectories(new File("reports/screenshots").toPath());
+			Files.createDirectories(new File("test-reports/screenshots").toPath());
 			Files.copy(src.toPath(), new File(path).toPath(),
 					StandardCopyOption.REPLACE_EXISTING);
 		}

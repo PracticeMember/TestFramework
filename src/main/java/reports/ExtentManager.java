@@ -9,7 +9,8 @@ public class ExtentManager {
 	
 	public static ExtentReports getInstance() {
 		if(extent==null) {
-			ExtentSparkReporter reporter=new ExtentSparkReporter("test-reports/ExtentReporter.html");
+			long timestamp=System.currentTimeMillis();
+			ExtentSparkReporter reporter=new ExtentSparkReporter("test-reports/ExtentReporter_"+timestamp+".html");
 			reporter.config().enableOfflineMode(true);
 			reporter.config().setTimelineEnabled(true);
 			extent=new ExtentReports();
